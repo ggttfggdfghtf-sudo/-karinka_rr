@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Разбор блога karrinka</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;600;700;800&display=swap">
+<style>
+:root{
+  --bg:#F4F3EF; --bg2:#EAE8E2; --card:#FFFFFF; --ink:#1F2733; --ink2:#5B6472; --line:#DDDAD2;
+  --coral:#E8662E; --coral-soft:#FCE8DD; --rose:#2F4A6B; --peach:#9DB0C6; --gold:#C9A46A; --on-coral:#fff;
+  --sun1:#F4A261; --sun2:#E8662E; --sun3:#2F4A6B; --shadow:0 18px 40px -26px rgba(90,60,40,.45);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#12161C; --bg2:#1A2029; --card:#1F2631; --ink:#EEF1F5; --ink2:#A8B1BE; --line:#2C3542;
+  --coral:#F58A4E; --coral-soft:#3A2519; --rose:#7FA2CC; --peach:#5E7591; --gold:#D8B57A; --on-coral:#12161C;
+  --sun1:#D98A4E; --sun2:#C8602C; --sun3:#2F4A6B; --shadow:0 18px 40px -26px rgba(0,0,0,.7); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12161C; --bg2:#1A2029; --card:#1F2631; --ink:#EEF1F5; --ink2:#A8B1BE; --line:#2C3542;
+  --coral:#F58A4E; --coral-soft:#3A2519; --rose:#7FA2CC; --peach:#5E7591; --gold:#D8B57A; --on-coral:#12161C;
+  --sun1:#D98A4E; --sun2:#C8602C; --sun3:#2F4A6B; --shadow:0 18px 40px -26px rgba(0,0,0,.7); color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:980px;margin:0 auto;padding-inline:20px;padding-block:0 80px}
+h1,h2,h3{font-family:'Lora',Georgia,serif;font-weight:600;letter-spacing:-.01em;text-wrap:balance;margin:0}
+em{font-family:'Lora',Georgia,serif;font-style:italic;font-weight:500;color:var(--coral)}
+.label{font-size:12px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--coral)}
+.hero{position:relative;padding-block:72px 48px;display:grid;grid-template-columns:1.3fr 1fr;gap:32px;align-items:center}
+.hero h1{font-size:clamp(40px,7vw,72px);line-height:1.04;margin-top:14px}
+.hero p{color:var(--ink2);font-size:18px;max-width:46ch;margin:20px 0 0}
+.sun{aspect-ratio:1;max-width:100%;width:340px;justify-self:center;border-radius:50%;background:radial-gradient(circle at 50% 62%,var(--sun1) 0%,var(--sun2) 48%,var(--sun3) 78%,transparent 79%);position:relative}
+.sun::after{content:"подарок от команды Маши ✦";position:absolute;left:-10px;bottom:6%;background:var(--card);color:var(--coral);font-family:'Lora',serif;font-style:italic;font-size:17px;padding:12px 18px;border-radius:6px;box-shadow:var(--shadow);transform:rotate(-5deg)}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);margin-inline:-20px;padding:10px 20px;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{display:inline-block;color:var(--ink2);text-decoration:none;font-size:14px;font-weight:600;padding:6px 12px;border-radius:999px}
+nav a:hover{background:var(--coral-soft);color:var(--coral)}
+section{padding-top:64px;scroll-margin-top:60px}
+section>h2{font-size:clamp(28px,4.4vw,42px);line-height:1.15;margin-top:10px}
+section>.lead{color:var(--ink2);max-width:62ch;margin:14px 0 0}
+.grid{display:grid;gap:16px;margin-top:28px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:var(--shadow);min-width:0}
+.card h3{font-size:22px;margin-top:14px;line-height:1.25}
+.card p{margin:8px 0 0;color:var(--ink2);font-size:16px}
+.card.hot{background:var(--coral);border-color:var(--coral)}
+.card.hot h3,.card.hot p{color:var(--on-coral)}
+.card.hot .ic{background:color-mix(in srgb,var(--on-coral) 22%,transparent);color:var(--on-coral)}
+.ic{width:52px;height:52px;border-radius:16px;background:var(--coral-soft);color:var(--coral);display:flex;align-items:center;justify-content:center}
+.ic svg{width:28px;height:28px}
+.note{margin-top:22px;padding:18px 22px;border-left:3px solid var(--coral);background:var(--bg2);border-radius:0 14px 14px 0;color:var(--ink2)}
+.tag{display:inline-flex;gap:8px;align-items:center;margin-top:16px;padding:6px 12px;border-radius:999px;background:var(--coral-soft);color:var(--coral);font-size:13px;font-weight:700}
+.mix{display:grid;grid-template-columns:260px 1fr;gap:36px;align-items:center;margin-top:28px}
+.mix svg{width:100%;max-width:260px;height:auto}
+.mix ul{list-style:none;margin:0;padding:0;display:grid;gap:18px}
+.mix li{display:grid;grid-template-columns:76px 1fr;gap:14px;align-items:baseline}
+.mix b{font-family:'Lora',serif;font-size:32px;font-variant-numeric:tabular-nums}
+.mix span{display:block;color:var(--ink2);font-size:15px}
+.pin{font-size:16px;line-height:1.7;white-space:pre-line}
+.ideas{counter-reset:i}
+.ideas ol{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:12px}
+.ideas li{counter-increment:i;display:grid;grid-template-columns:34px 1fr;gap:8px;font-size:15.5px;line-height:1.45}
+.ideas li::before{content:counter(i,decimal-leading-zero);font-family:'Lora',serif;font-weight:600;color:var(--coral)}
+.check{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:10px}
+.check li{display:flex;gap:12px;align-items:flex-start;cursor:pointer;user-select:none}
+.check li::before{content:"";flex:none;width:20px;height:20px;margin-top:3px;border-radius:6px;border:2px solid var(--coral)}
+.check li.done{color:var(--ink2);text-decoration:line-through}
+.check li.done::before{background:var(--coral);box-shadow:inset 0 0 0 3px var(--card)}
+.final{margin-top:72px;padding:40px 32px;border-radius:28px;background:linear-gradient(140deg,var(--coral-soft),var(--bg2));border:1px solid var(--line)}
+.final h2{font-size:clamp(28px,4.4vw,40px)}
+.final p{max-width:60ch;color:var(--ink2)}
+.small{font-size:14px;color:var(--ink2)}
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr;padding-top:40px}.sun{width:220px}
+  .g2,.g3{grid-template-columns:1fr}
+  .mix{grid-template-columns:1fr}.mix svg{max-width:220px;margin:auto}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div>
+      <div class="label">разбор блога · лично для тебя</div>
+      <h1>Блог про вахту: <em>как перейти и с чего начать</em></h1>
+      <p>Instagram @karrinka.rr. Сначала о том, что у тебя уже есть, потом — спокойно о том, как перестроить блог под новую тему.</p>
+    </div>
+    <div class="sun" aria-hidden="true"></div>
+  </header>
+
+  <nav aria-label="Разделы">
+    <a href="#good">Что уже есть</a><a href="#now">Сейчас</a><a href="#core">Ядро</a><a href="#switch">Переход</a><a href="#profile">Профиль</a><a href="#topics">Темы</a><a href="#ideas">15 идей</a><a href="#club">Тусовки</a><a href="#video">Видео</a><a href="#plan">План</a>
+  </nav>
+
+  <section id="good">
+    <div class="label">что у тебя уже есть</div>
+    <h2>Редкая тема — <em>и живой человек за ней</em></h2>
+    <div class="grid g2">
+      <div class="card hot"><div class="ic" data-i="box"></div><h3>Тема, которую мало кто показывает</h3><p>Девушек, которые честно рассказывают про вахту, единицы. Людям интересно, как это на самом деле — и тем, кто сам туда собирается, и просто любопытным.</p></div>
+      <div class="card"><div class="ic" data-i="smile"></div><h3>Ты настоящая</h3><p>Личный блог без глянца — плюс. Тебе не нужно «играть блогера», нужно просто показывать свою жизнь чуть структурнее.</p></div>
+      <div class="card"><div class="ic" data-i="camera"></div><h3>Материал уже под рукой</h3><p>Быт, смены, дорога, возвращение домой — контент рождается сам, его не нужно придумывать.</p></div>
+      <div class="card"><div class="ic" data-i="users"></div><h3>Своя аудитория</h3><p>Люди, которые уже подписаны, знают тебя лично. Часть из них останется и на новую тему, если перейти аккуратно.</p></div>
+    </div>
+  </section>
+
+  <section id="now">
+    <div class="label">что сейчас в ленте</div>
+    <h2>Сейчас это блог <em>«для себя»</em></h2>
+    <div class="grid g3">
+      <div class="card"><div class="ic" data-i="moon"></div><h3>Клубы и вечера</h3><p>Тусовки, вечеринки, отдых — это видно в первую очередь.</p></div>
+      <div class="card"><div class="ic" data-i="heart"></div><h3>Обычная жизнь</h3><p>Личные моменты без общей темы.</p></div>
+      <div class="card hot"><div class="ic" data-i="eye"></div><h3>Вахты почти не видно</h3><p>А именно про неё ты хочешь вести блог.</p></div>
+    </div>
+    <p class="note">Для личного аккаунта это нормально. Сложность в другом: темы «вахта» и «клубы» почти не пересекаются. Если просто начать постить вахту поверх клубной ленты, получится каша: старые подписчики не поймут, новые запутаются.</p>
+  </section>
+
+  <section id="core">
+    <div class="label">главная точка роста</div>
+    <h2>Новое ядро — <em>девушка на вахте, как это на самом деле</em></h2>
+    <div class="grid g3">
+      <div class="card hot"><div class="ic" data-i="box"></div><h3>Реалии вахты</h3><p>Быт, условия, смены, еда, связь — честно и без прикрас.</p></div>
+      <div class="card"><div class="ic" data-i="coins"></div><h3>Деньги</h3><p>Сколько реально остаётся и на что уходит.</p></div>
+      <div class="card"><div class="ic" data-i="home"></div><h3>Жизнь между сменами</h3><p>Отношения, одиночество, возвращение домой.</p></div>
+    </div>
+    <p class="note">Не просто «я работаю на вахте», а <b>жизнь девушки, которая выбрала такой формат</b>. За таким блогом следят, потому что это история, а не отчёт.</p>
+  </section>
+
+  <section id="switch">
+    <div class="label">как перейти</div>
+    <h2>Плавно, без <em>резкого обрыва</em></h2>
+    <div class="grid g2">
+      <div class="card hot"><div class="label" style="color:var(--on-coral)">советуем · вариант А</div><h3>Плавный переход за 3–4 недели</h3><p>Постепенно сдвигаешь ленту в сторону вахты. Старые подписчики привыкают, новые уже видят тему.</p></div>
+      <div class="card"><div class="label">вариант Б</div><h3>Резкий ребрендинг</h3><p>Новая шапка, 5–7 сильных роликов про вахту подряд и сторис «блог меняется — теперь здесь жизнь на вахте». Быстрее, но для маленького блога рискованнее.</p></div>
+    </div>
+    <div class="mix">
+      <svg viewBox="0 0 260 260" role="img" aria-label="Доли контента: вахта 70%, личное 20%, старый вайб 10%"><g id="donut" transform="translate(130 130)"></g>
+        <text x="130" y="124" text-anchor="middle" font-family="Lora,serif" font-style="italic" font-size="20" fill="var(--ink2)">первый</text>
+        <text x="130" y="150" text-anchor="middle" font-family="Lora,serif" font-style="italic" font-size="20" fill="var(--ink2)">месяц</text></svg>
+      <ul>
+        <li><b style="color:var(--coral)">70%</b><div>Вахта<span>смены, сборы, жизнь между вахтами</span></div></li>
+        <li><b style="color:var(--rose)">20%</b><div>Личное<span>ты, но уже без сильного уклона в клубы</span></div></li>
+        <li><b style="color:var(--peach)">10%</b><div>Старый вайб<span>чтобы не потерять тех, кто уже с тобой</span></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="profile">
+    <div class="label">шапка, хайлайты, закреп</div>
+    <h2>Профиль должен <em>сразу говорить про вахту</em></h2>
+    <div class="grid g3">
+      <div class="card"><div class="label">шапка — пример</div>
+        <p class="pin">Девушка на вахте 👷‍♀️
+Как это на самом деле: быт, деньги, жизнь между сменами
+Спрашивай — отвечу в сторис ↓</p>
+        <p class="small"><em>пиши своими словами</em></p></div>
+      <div class="card"><div class="label">хайлайты</div>
+        <p>Клубные — убрать или переименовать. Новые:</p>
+        <p class="pin"><b>Вахта · Быт · Деньги · Между сменами · Вопросы</b></p></div>
+      <div class="card"><div class="label">закреп</div>
+        <p>2–3 ролика, которые объясняют, кто ты и почему ведёшь блог про вахту. Например: «как я попала на вахту», «один мой день на смене», «сколько я на самом деле зарабатываю».</p></div>
+    </div>
+  </section>
+
+  <section id="topics">
+    <div class="label">о чём снимать</div>
+    <h2>Шесть направлений, <em>которые заходят</em></h2>
+    <div class="grid g3">
+      <div class="card"><div class="ic" data-i="box"></div><h3>Реалии</h3><p>Быт, еда, душ, связь, условия проживания.</p></div>
+      <div class="card"><div class="ic" data-i="coins"></div><h3>Деньги</h3><p>Сколько реально остаётся, на что тратишь, ради чего едешь.</p></div>
+      <div class="card"><div class="ic" data-i="heart"></div><h3>Психология</h3><p>Одиночество, отношения на расстоянии, усталость.</p></div>
+      <div class="card"><div class="ic" data-i="cal"></div><h3>Сборы и возвращение</h3><p>Что берёшь с собой, первые дни дома после смены.</p></div>
+      <div class="card"><div class="ic" data-i="repeat"></div><h3>Город vs вахта</h3><p>Сравнения: утро, еда, выходные, люди вокруг.</p></div>
+      <div class="card hot"><div class="ic" data-i="eye"></div><h3>Честные минусы</h3><p>То, о чём не говорят в вакансиях. Это заходит сильнее всего.</p></div>
+    </div>
+  </section>
+
+  <section id="ideas" class="ideas">
+    <div class="label">15 идей рилсов · 15–40 секунд</div>
+    <h2>Бери и <em>снимай</em></h2>
+    <div class="grid g3">
+      <div class="card"><div class="label">реалии и быт</div><ol>
+        <li>Один мой день на вахте — от подъёма до отбоя</li>
+        <li>Где я живу на вахте: рум-тур</li>
+        <li>Чем нас кормят — честно</li>
+        <li>Что на вахте бесит больше всего</li>
+        <li>Связь, интернет и как я при этом веду блог</li></ol></div>
+      <div class="card"><div class="label">деньги и решения</div><ol>
+        <li>Сколько я на самом деле зарабатываю и сколько остаётся</li>
+        <li>Почему я выбрала вахту, а не работу в городе</li>
+        <li>3 вещи, которые я поняла после первой вахты</li>
+        <li>Что я бы сказала себе перед первой поездкой</li>
+        <li>Вахта для девушки: мифы и как на самом деле</li></ol></div>
+      <div class="card"><div class="label">между сменами</div><ol>
+        <li>Собираю чемодан на вахту: что беру всегда</li>
+        <li>Первый день дома после смены</li>
+        <li>Как держать отношения на расстоянии</li>
+        <li>Город vs вахта: моё утро там и тут</li>
+        <li>Как я справляюсь с одиночеством на смене</li></ol></div>
+    </div>
+    <p class="note"><b>Как подавать:</b> начинай с личного и конкретного — «Сейчас покажу, где я живу…», «Мне задают этот вопрос чаще всего…». Отвечай на вопросы подписчиков роликами — так появляется ещё больше идей.</p>
+  </section>
+
+  <section id="club">
+    <div class="label">что делать со старым контентом</div>
+    <h2>Тусовки не выбрасывать — <em>а привязать к вахте</em></h2>
+    <div class="grid g2">
+      <div class="card"><div class="ic" data-i="moon"></div><h3>Было</h3><p>Просто вечер в клубе, без связи с темой блога.</p></div>
+      <div class="card hot"><div class="ic" data-i="home"></div><h3>Стало</h3><p>«Первый вечер в городе после двух месяцев вахты». «Как я отдыхаю между сменами». Тот же контент — но уже про твою тему.</p></div>
+    </div>
+  </section>
+
+  <section id="video">
+    <div class="label">видео</div>
+    <h2>Мелочи, которые <em>поднимают досмотры</em></h2>
+    <div class="grid g3">
+      <div class="card"><div class="ic" data-i="eye"></div><h3>Первые 1–2 секунды</h3><p>Движение + текст на экране: «Сколько я заработала за эту вахту» работает лучше, чем просто кадр.</p></div>
+      <div class="card"><div class="ic" data-i="repeat"></div><h3>Ритм</h3><p>Монтаж чуть быстрее, чем кажется. Вырезай паузы.</p></div>
+      <div class="card"><div class="ic" data-i="chat"></div><h3>Конец ролика</h3><p>Вопрос: «Поехала бы на вахту? Напиши». Комментарии двигают ролик.</p></div>
+      <div class="card"><div class="ic" data-i="pen"></div><h3>Подписи</h3><p>Текст на видео — многие смотрят без звука.</p></div>
+      <div class="card"><div class="ic" data-i="mic"></div><h3>Голос</h3><p>Рассказ за кадром делает обычные кадры смены историей.</p></div>
+      <div class="card"><div class="ic" data-i="users"></div><h3>Вопросы подписчиков</h3><p>Собирай в сторис и отвечай роликами — готовый контент-план.</p></div>
+    </div>
+  </section>
+
+  <section id="plan">
+    <div class="label">с чего начать</div>
+    <h2>План на <em>две недели</em></h2>
+    <p class="lead">Можно отмечать пункты прямо здесь.</p>
+    <div class="grid g2">
+      <div class="card"><div class="label">неделя 1</div><h3>Профиль</h3><ul class="check">
+        <li>новая шапка про вахту</li>
+        <li>убрать или переименовать клубные хайлайты, сделать новые</li>
+        <li>снять и закрепить ролик «кто я и почему про вахту»</li></ul></div>
+      <div class="card"><div class="label">неделя 2</div><h3>Первые ролики</h3><ul class="check">
+        <li>3–4 ролика про вахту из списка идей</li>
+        <li>сторис с вопросом «что вам интересно про вахту?»</li>
+        <li>один вечер в городе — уже в привязке к вахте</li></ul></div>
+    </div>
+    <p class="small" style="margin-top:16px">Не нужно делать всё сразу. Даже эти шаги уже покажут новым людям, о чём твой блог.</p>
+  </section>
+
+  <div class="final">
+    <div class="label">напоследок</div>
+    <h2>У тебя редкая тема — <em>и это уже половина успеха</em></h2>
+    <p>Честный блог девушки на вахте может вырасти быстрее обычного лайфстайла: тема конкретная, а показывают её единицы. Главное — перестроить ленту осознанно, а не постить вахту иногда между клубными сторис.</p>
+    <p>А если захочется пройти этот путь не одной — у Маши есть личное менторство. Просто знай, что такая возможность есть 🤍</p>
+  </div>
+</div>
+
+<script>
+const I={
+box:'<path d="M6 15l18-9 18 9v18l-18 9-18-9z"/><path d="M6 15l18 9 18-9M24 24v18"/>',
+coins:'<ellipse cx="19" cy="13" rx="12" ry="5"/><path d="M7 13v8c0 3 5 5 12 5s12-2 12-5v-8"/><ellipse cx="33" cy="31" rx="10" ry="4.5"/><path d="M23 31v6c0 2.5 4.5 4.5 10 4.5s10-2 10-4.5v-6"/>',
+home:'<path d="M6 22L24 7l18 15"/><path d="M11 19v21h26V19"/><path d="M20 40V29h8v11"/>',
+cal:'<rect x="6" y="10" width="36" height="31" rx="4"/><line x1="6" y1="19" x2="42" y2="19"/><line x1="16" y1="5" x2="16" y2="13"/><line x1="32" y1="5" x2="32" y2="13"/>',
+moon:'<path d="M34 30A15 15 0 0 1 18 10a15 15 0 1 0 16 20z"/>',
+heart:'<path d="M24 40C10 30 6 22 10 15c4-6 11-5 14 1 3-6 10-7 14-1 4 7 0 15-14 25z"/>',
+smile:'<circle cx="24" cy="24" r="18"/><path d="M16 28q8 7 16 0"/><circle cx="18" cy="19" r="1.5"/><circle cx="30" cy="19" r="1.5"/>',
+camera:'<rect x="5" y="14" width="38" height="26" rx="5"/><circle cx="24" cy="27" r="7"/><path d="M17 14l3-5h8l3 5"/>',
+users:'<circle cx="18" cy="16" r="6"/><path d="M6 38c0-7 5-11 12-11s12 4 12 11"/><circle cx="34" cy="18" r="5"/><path d="M31 27c6 0 11 3 11 10"/>',
+sun:'<circle cx="24" cy="24" r="8"/><path d="M24 4v6M24 38v6M4 24h6M38 24h6M10 10l4 4M34 34l4 4M38 10l-4 4M14 34l-4 4"/>',
+dog:'<path d="M12 18c-3-1-5 2-5 6 0 3 2 5 4 5M36 18c3-1 5 2 5 6 0 3-2 5-4 5"/><path d="M14 16c2-5 6-7 10-7s8 2 10 7v12c0 7-5 12-10 12S14 35 14 28z"/><circle cx="20" cy="24" r="1.6"/><circle cx="28" cy="24" r="1.6"/><path d="M22 31h4l-2 2z"/>',
+eye:'<path d="M3 24c7-10 14-14 21-14s14 4 21 14c-7 10-14 14-21 14S10 34 3 24z"/><circle cx="24" cy="24" r="6"/>',
+repeat:'<path d="M8 20a14 14 0 0 1 26-6l4-4v11H27l5-4a10 10 0 0 0-19 4"/><path d="M40 28a14 14 0 0 1-26 6l-4 4V27h11l-5 4a10 10 0 0 0 19-4"/>',
+mic:'<rect x="18" y="5" width="12" height="23" rx="6"/><path d="M11 22c0 8 6 13 13 13s13-5 13-13"/><line x1="24" y1="35" x2="24" y2="43"/>',
+chat:'<path d="M9 9h30a4 4 0 0 1 4 4v16a4 4 0 0 1-4 4H22l-9 7v-7H9a4 4 0 0 1-4-4V13a4 4 0 0 1 4-4z"/>',
+pen:'<path d="M31 7l10 10-23 23H8V30z"/><line x1="26" y1="12" x2="36" y2="22"/>'};
+document.querySelectorAll('.ic[data-i]').forEach(e=>{e.innerHTML='<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">'+I[e.dataset.i]+'</svg>'});
+const parts=[[70,'var(--coral)'],[20,'var(--rose)'],[10,'var(--peach)']];
+let a=0,r=95,g=document.getElementById('donut'),html='';
+parts.forEach(([p,c])=>{const a0=a/100*2*Math.PI-Math.PI/2;a+=p;const a1=a/100*2*Math.PI-Math.PI/2;
+html+=`<path d="M${(r*Math.cos(a0)).toFixed(1)} ${(r*Math.sin(a0)).toFixed(1)} A${r} ${r} 0 ${p>50?1:0} 1 ${(r*Math.cos(a1)).toFixed(1)} ${(r*Math.sin(a1)).toFixed(1)}" stroke="${c}" stroke-width="40" fill="none"/>`});
+g.innerHTML=html;
+document.querySelectorAll('#plan .check li').forEach(li=>li.addEventListener('click',()=>li.classList.toggle('done')));
+</script>
+
+</body>
+</html>
